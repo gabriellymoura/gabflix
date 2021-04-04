@@ -1,70 +1,100 @@
-# Getting Started with Create React App
+## Pontos importantes da aula
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+- Configurar o eslint, rodar na raíz do projeto:
 
-In the project directory, you can run:
+```js
+npx eslint --init
+```
 
-### `yarn start`
+- Regra que alteramos na aula no arquivo .eslintrc.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```json
+{
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+  }
+}
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+> Atenção!!! Pode ocorrer o exato bug do vídeo, nós resolvemos alterando a versão do eslint no package.json
 
-### `yarn test`
+- Instalar os prop-types
+```js
+npm install prop-types
+````
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+============================
 
-### `yarn build`
+- Para criar sua conta na Heroku, acesse esse link: https://signup.heroku.com/login
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Faça as configurações para criar um projeto como fizemos no vídeo, vá pausando para ficar mais fácil :)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Instalar o Json Server: https://github.com/typicode/json-server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```js
+npm install json-server
+````
 
-### `yarn eject`
+- Você pode pegar o modelo do DB Json aqui nesse gist, lembre-se de que você precisa ter pelo menos essa estrutura básica:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```js
+{
+  "categorias": [
+    {
+      "id": 1,
+      "titulo": "Front End",
+      "cor": "#6BD1FF",
+      "link_extra": {
+        "text": "Formação de Front End na Alura",
+        "url": "https://www.alura.com.br/cursos-online-front-end"
+      }
+    }
+   ],
+  "videos": [
+    {
+      "id": 1,
+      "categoriaId": 1,
+      "titulo": "SEO com React",
+      "url": "https://www.youtube.com/watch?v=c8mVlakBESE"
+    }
+  ]
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- O código do arquivo server.js ta aqui:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```js
+const jsonServer = require('json-server')
+const server = jsonServer.create()
+const router = jsonServer.router('db.json')
+const middlewares = jsonServer.defaults()
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+const port = process.env.PORT || 8080;
 
-## Learn More
+server.use(middlewares)
+server.use(router)
+server.listen(port, () => {
+  console.log(`JSON Server is running in ${port}`)
+}) 
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Para rodar tudo junto, lembre-se se instalar:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+npm install --save-dev concurrently
+```
 
-### Code Splitting
+- E de alterar os scripts no package.json
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```json
+"scripts": {
+  "start": "node ./server.js",
+  "dev": "concurrently \"react-scripts start\" \"node ./server.js\"",
+  "build": "react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
+  "server:static": "json-server --watch ./src/data/db.json --port 8080",
+  "server": "node ./server.js"
+},
+```
