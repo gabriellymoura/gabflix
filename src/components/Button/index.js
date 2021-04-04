@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import styled from 'styled-components';
 
 const Button = styled.a`
@@ -13,8 +14,8 @@ const Button = styled.a`
   border-radius: 5px;
   text-decoration: none;
   display: inline-block;
+  // eslint-disable-next-line linebreak-style
   transition: opacity .3s;
-  
   &:hover,
   &:focus{
     opacity: .5;

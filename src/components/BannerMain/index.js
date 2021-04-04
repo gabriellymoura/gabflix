@@ -11,8 +11,11 @@ function getYouTubeId(youtubeURL) {
 }
 
 export default function BannerMain({
+  // eslint-disable-next-line react/prop-types
   videoTitle,
+  // eslint-disable-next-line react/prop-types
   videoDescription,
+  // eslint-disable-next-line react/prop-types
   url,
 }) {
   const youTubeID = getYouTubeId(url);

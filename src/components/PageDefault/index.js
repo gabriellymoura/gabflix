@@ -1,7 +1,11 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable linebreak-style */
 import React from 'react';
+import styled from 'styled-components';
 import Footer from '../Footer';
 import Menu from '../Menu';
-import styled from 'styled-components';
 
 const Main = styled.main`
   background-color: var(--black);
@@ -12,15 +16,14 @@ const Main = styled.main`
   padding-right: 5%;
 `;
 
-
 export default function PageDefault(props) {
-  return(
+  return (
     <>
       <Menu />
-        <Main>
-          {props.children}
-        </Main>
+      <Main>
+        {props.children}
+      </Main>
       <Footer />
     </>
-  )
+  );
 }
