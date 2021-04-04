@@ -42,6 +42,7 @@
     "concurrently": "^5.2.0"
   },
   "engines": {
-    "node": "15.x"
+    "npm": "7.6.3",
+    "node": "15.12.0"
   }
 }
