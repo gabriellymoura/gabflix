@@ -1,1 +1,0 @@
-Lembre-se de copiar e colar esses arquivos, apagar a past node_modules e rodar no terminao o comando `npm install`
