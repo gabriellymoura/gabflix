@@ -15,9 +15,9 @@ export default function CadastroVideo() {
   const [categorias, setCategorias] = useState([]);
   const categoryTitles = categorias.map(({ titulo }) => titulo);
   const { handleChange, values } = useForm({
-    titulo: 'teste 2',
-    url: 'https://www.youtube.com/watch?v=VE7iDdGdDtM',
-    categoria: 'Front End',
+    titulo: '',
+    url: '',
+    categoria: '',
   });
 
   useEffect(() => {
@@ -51,6 +51,8 @@ export default function CadastroVideo() {
         })
           .then(() => {
             // console.log('Cadastrou com sucesso');
+            // eslint-disable-next-line no-alert
+            alert('Video Cadastrado com sucesso!');
             history.push('/');
           });
       }}
